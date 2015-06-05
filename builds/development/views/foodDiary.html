@@ -1,6 +1,6 @@
 <div class="meetings cf">
 
-  <h1>Add Meal for (today's date)</h1>
+  <h1>Add Meal for {{today | date:'shortDate'}}</h1>
   <form class="formgroup addmeeting cf"
     name="myform"
     ng-submit="addMeal()"
@@ -28,6 +28,6 @@
       ng-href="#/checkins/{{currentUser.regUser}}/{{key}}">
       <span>Share your Recipe</span></a>
 
-    <span class="text">{{meal.name}}</span>
+    <span class="text">Meal name: {{meal.name}} Added on: {{meal.date | date:'medium'}}</span>
   </div><!-- meal list -->
 </div><!-- meetings cf -->
