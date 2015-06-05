@@ -2,7 +2,7 @@ myApp.factory('CountMeetings', function($firebase,
   $rootScope, FIREBASE_URL) {
 
   var ref = new Firebase(FIREBASE_URL + '/users/' + 
-    $rootScope.currentUser.$id + '/meetings');
+    $rootScope.currentUser.$id + '/food-diary');
 
   var meetingsInfo = $firebase(ref);
 

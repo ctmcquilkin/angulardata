@@ -1,0 +1,33 @@
+<div class="meetings cf">
+
+  <h1>Add Meal for (today's date)</h1>
+  <form class="formgroup addmeeting cf"
+    name="myform"
+    ng-submit="addMeal()"
+    novalidate>
+    <div class="inputwrapper">
+      <input type="text" name="meetingname" 
+      placeholder="Meal name" 
+        ng-model="mealname" ng-required="true">
+    </div>
+    <button type="submit" class="btn"
+      ng-disabled="myform.$invalid">+</button>
+  </form>
+
+  <h2>Your recent meals</h2>
+  <div class="meeting" ng-repeat="(key, meal) in meals">
+    <button class="btn btn-delete tooltip"
+      ng-click="deleteMeal(key)">
+    <span>Delete this meal</span></button>
+
+    <a class="btn btn-list tooltip" 
+      ng-href="#/checkins/{{currentUser.regUser}}/{{key}}/checkinsList">
+      <span>Look for similar recipes on Eat Right</span></a>
+
+    <a class="btn btn-checkin tooltip" 
+      ng-href="#/checkins/{{currentUser.regUser}}/{{key}}">
+      <span>Share your Recipe</span></a>
+
+    <span class="text">{{meal.name}}</span>
+  </div><!-- meal list -->
+</div><!-- meetings cf -->

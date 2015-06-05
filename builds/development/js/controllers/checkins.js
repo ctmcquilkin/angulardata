@@ -10,7 +10,7 @@ myApp.controller('CheckInsController', function($scope,
   $scope.query='';
 
   var ref = new Firebase(FIREBASE_URL + "/users/" +
-    $scope.whichuser + "/meetings/" + 
+    $scope.whichuser + "/food-diary/" + 
     $scope.whichmeeting + '/checkins');
 
   var checkinsList = $firebase(ref).$asArray();
@@ -55,7 +55,7 @@ myApp.controller('CheckInsController', function($scope,
 
   $scope.giveLove = function(myItem, myGift) {
     var refLove = new Firebase(FIREBASE_URL + '/users/'+
-      $scope.whichuser + '/meetings/' +
+      $scope.whichuser + '/food-diary/' +
       $scope.whichmeeting + '/checkins/' + myItem.$id +
       '/awards');
     var checkinsObj = $firebase(refLove);
@@ -70,7 +70,7 @@ myApp.controller('CheckInsController', function($scope,
 
   $scope.deleteLove = function(checkinId, award) {
     var refLove = new Firebase(FIREBASE_URL + '/users/'+
-      $scope.whichuser + '/meetings/' +
+      $scope.whichuser + '/food-diary/' +
       $scope.whichmeeting + '/checkins/' + checkinId +
       '/awards');
     var record = $firebase(refLove);

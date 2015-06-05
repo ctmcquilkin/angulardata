@@ -1,6 +1,6 @@
 var myApp = angular.module('myApp', ['ngRoute',
 'firebase', 'appControllers'])
-.constant('FIREBASE_URL', 'https://attendanceldcapp.firebaseio.com/');
+.constant('FIREBASE_URL', 'https://eat-right.firebaseio.com/');
 
 var appControllers = angular.module('appControllers',
   ['firebase']);
@@ -33,9 +33,9 @@ myApp.config(['$routeProvider', function($routeProvider) {
       templateUrl: 'views/checkinslist.html',
       controller:  'CheckInsController'
     }).
-    when('/meetings', {
-      templateUrl: 'views/meetings.html',
-      controller: 'MeetingsController',
+    when('/food-diary', {
+      templateUrl: 'views/foodDiary.html',
+      controller: 'FoodDiaryController',
       resolve : {
         currentAuth: function(Authentication) {
           return Authentication.requireAuth();
