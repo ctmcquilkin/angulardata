@@ -21,8 +21,8 @@ myApp.controller('CheckInsController', function($scope,
 
     var myData = {
       firstname: $scope.user.firstname,
-      lastname: $scope.user.lastname,
-      email: $scope.user.email,
+      recipename: $scope.user.recipename,
+      ingredients: $scope.user.ingredients,
       date: Firebase.ServerValue.TIMESTAMP
     };
 

@@ -9,27 +9,26 @@
 
     <p class="error formerror" ng-show="message">{{ message }}</p>
 
-    <input type="firstname" name="firstname" placeholder="First Name"
+    <input type="firstname" name="firstname" placeholder="Your First Name"
       ng-model="user.firstname" ng-required="true">
     <p class="error validationerror"
       ng-show="myform.firstname.$invalid && myform.firstname.$touched">
       First Name is required</p>
 
-    <input type="lastname" name="lastname" placeholder="Last Name"
-      ng-model="user.lastname" ng-required="true">
+    <input type="recipename" name="recipename" placeholder="Recipe Name"
+      ng-model="user.recipename" ng-required="true">
     <p class="error validationerror"
-      ng-show="myform.lastname.$invalid && myform.lastname.$touched">
-      Last Name is required</p>
-    
+      ng-show="myform.recipename.$invalid && myform.recipename.$touched">
+      Recipe Name is required</p>
 
-    <input type="email" name="email" placeholder="Email"
-      ng-model="user.email" ng-required="true">
+    <input type="ingredients" name="ingredients" placeholder="Ingredients"
+      ng-model="user.ingredients" ng-required="true">
     <p class="error validationerror"
-      ng-show="myform.email.$invalid && myform.email.$touched">
-      Must be a valid email</p>
-    
+      ng-show="myform.ingredients.$invalid && myform.ingredients.$touched">
+      At least one Ingredient required</p>
+
     <button type="submit" class="btn"
-      ng-disabled="myform.$invalid">Check-in</button>
-    <p>or <a href="#/login">login</a></p>
+      ng-disabled="myform.$invalid">Share Recipe</button>
+      
   </form>
 </section>

@@ -26,11 +26,11 @@ myApp.config(['$routeProvider', function($routeProvider) {
       controller:  'RegistrationController'
     }).
     when('/checkins/:uId/:mId', {
-      templateUrl: 'views/checkins.html',
+      templateUrl: 'views/shareRecipe.html',
       controller:  'CheckInsController'
     }).
     when('/checkins/:uId/:mId/checkinsList', {
-      templateUrl: 'views/checkinslist.html',
+      templateUrl: 'views/sharelist.html',
       controller:  'CheckInsController'
     }).
     when('/food-diary', {
