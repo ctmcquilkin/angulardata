@@ -1,8 +1,8 @@
-myApp.controller('CheckInsController', function($scope, 
+myApp.controller('RecipeController', function($scope, 
   $rootScope, $firebase, $routeParams, 
-  $location, Authentication, CountMeetings, FIREBASE_URL) {
+  $location, Authentication, CountMeals, FIREBASE_URL) {
 
-  $scope.whichmeeting = $routeParams.mId;
+  $scope.whichrecipe = $routeParams.mId;
   $scope.whichuser = $routeParams.uId;
   $scope.order="firstname";
   $scope.direction= null;
@@ -10,13 +10,13 @@ myApp.controller('CheckInsController', function($scope,
   $scope.query='';
 
   var ref = new Firebase(FIREBASE_URL + "/users/" +
-    $scope.whichuser + "/meetings/" + 
-    $scope.whichmeeting + '/checkins');
+    $scope.whichuser + "/food-diary/" + 
+    $scope.whichrecipe + '/recipes');
 
-  var checkinsList = $firebase(ref).$asArray();
-  $scope.checkins = checkinsList;
+  var recipeList = $firebase(ref).$asArray();
+  $scope.recipes = recipeList;
 
-  $scope.addCheckin = function() {
+  $scope.addRecipe = function() {
     var checkinsObj = $firebase(ref);
 
     var myData = {
@@ -26,16 +26,16 @@ myApp.controller('CheckInsController', function($scope,
       date: Firebase.ServerValue.TIMESTAMP
     };
 
-    checkinsObj.$push(myData).then(function() {
-      $location.path('/checkins/' + $scope.whichuser + '/' +
-        $scope.whichmeeting + '/checkinsList');
+    recipesObj.$push(myData).then(function() {
+      $location.path('/recipes/' + $scope.whichuser + '/' +
+        $scope.whichrecipe + '/recipeList');
     });//checkinsObj
   }; //addCheckin
 
 
   $scope.pickRandom = function() {
-    var whichRecord = Math.round(Math.random() * checkinsList.length);
-    $scope.recordId = checkinsList.$keyAt(whichRecord);
+    var whichRecord = Math.round(Math.random() * recipeList.length);
+    $scope.recordId = recipeList.$keyAt(whichRecord);
   }; //pick winner
 
   $scope.deleteCheckin = function(id) {
@@ -55,26 +55,26 @@ myApp.controller('CheckInsController', function($scope,
 
   $scope.giveLove = function(myItem, myGift) {
     var refLove = new Firebase(FIREBASE_URL + '/users/'+
-      $scope.whichuser + '/meetings/' +
-      $scope.whichmeeting + '/checkins/' + myItem.$id +
+      $scope.whichuser + '/food-diary/' +
+      $scope.whichrecipe + '/recipes/' + myItem.$id +
       '/awards');
-    var checkinsObj = $firebase(refLove);
+    var recipesObj = $firebase(refLove);
 
     var myData = {
       name: myGift,
       date: Firebase.ServerValue.TIMESTAMP
     };
 
-    checkinsObj.$push(myData);
+    recipesObj.$push(myData);
   }; //giveLove
 
-  $scope.deleteLove = function(checkinId, award) {
+  $scope.deleteLove = function(recipeId, award) {
     var refLove = new Firebase(FIREBASE_URL + '/users/'+
-      $scope.whichuser + '/meetings/' +
-      $scope.whichmeeting + '/checkins/' + checkinId +
+      $scope.whichuser + '/food-diary/' +
+      $scope.whichrecipe + '/recipes/' + recipeId +
       '/awards');
     var record = $firebase(refLove);
     record.$remove(award);
   }; //deleteLove
 
-}); //CheckInsController
+}); //RecipeController

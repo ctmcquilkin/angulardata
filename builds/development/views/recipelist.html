@@ -1,0 +1,87 @@
+<div class="checkinslist">
+  <h1>Recipes</h1>
+  <p>Here's a list of the latest recipes added to Eat Right</p>
+
+  <div class="search cf">
+    <H2>Search Recipies</H2>
+    <input type="text" ng-model="query" placeholder="Search for Recipies">
+
+    <div class="formgroup cf">
+      <span class="label">by:</span>
+      <select ng-model="order">
+        <option value="recipename">Recipe Name</option>
+        <option value="lastname">Ingredient Name</option>
+        <option value="date">Date</option>
+      </select>
+    </div><!-- formgroup -->
+
+    <div class="formgroup cf">
+      <input id="dirascending" type="radio" ng-model="direction"
+        name="direction">
+      <label for=dirascending>asc</label>
+      <input id="dirdescending" type="radio" ng-model="direction"
+        name="direction" value="reverse">
+      <label for=dirdescending>desc</label>
+    </div><!-- formgroup -->
+
+    <div ng-show="currentUser" class="buttons cf">
+      <button ng-hide="recordId" class="btn btn-pick"
+        ng-click="pickRandom()">Pick Random</button>
+
+      <button ng-show="recordId" type="button" class="btn btn-pick"
+        ng-click="recordId=''">Reset</button>
+    </div><!-- buttons -->
+
+  </div><!-- search -->
+
+  <ul class="userlist cf">
+    <li ng-class="recipe.userState" 
+      ng-repeat="recipe in recipes | 
+      orderBy: order:direction | filter: { $id: recordId,
+      $: query}">
+      <div class="checkin">
+        <div class="buttons" ng-show="currentUser">
+          <button class="btn btn-delete tooltip"
+            confirmation-needed = "Are you sure you want to delete this recipe?"
+            ng-click="deleteCheckin(recipe.$id)">
+          <span>Delete this recipe</span></button>
+          <button class="btn btn-love tooltip"
+            ng-click="showLove(recipe)">
+            <span>Show the love</span></button>
+        </div> <!-- buttons -->
+        <div class="info">
+          <h2>{{recipe.firstname}} {{recipe.recipename}}</h2>
+          <div class="date">
+            {{ recipe.date | date: "MMM d, yy h:mm a"}}
+          </div><!-- date -->
+        </div><!-- info -->
+
+        <div class="showcheckins" ng-show="recipe.show">
+          <form class="cf"
+            ng-submit="giveLove(recipe, recipe.giftText)"
+            novalidate>
+            <input type="text" name="giftText"
+              ng-required="true"
+              placeholder="What are you giving them?"
+              ng-model="recipe.giftText">
+            <button type="submit" class="btn"
+              ng-disabled="myform.$invalid">+</button>
+          </form>
+
+          <ul class="awardslist cf">
+            <li class="cf" ng-repeat="(key,award) in recipe.awards">
+              <div class="award">{{award.name}}
+                <div class="buttons" ng-show="currentUser">
+                  <button class="btn btn-delete tooltip"
+                    confirmation-needed = "Are you sure you want to delete this award?"
+                    ng-click="deleteLove(recipe.$id,key)">
+                    <span>Delete this award</span></button>
+                </div><!-- buttons -->
+              </div><!-- award -->
+            </li>            
+          </ul>
+        </div><!-- showcheckins -->
+      </div><!-- checkin -->
+    </li>
+  </ul>
+</div>
