@@ -1,6 +1,6 @@
 myApp.controller('FoodDiaryController',
-  function($scope, $rootScope, $firebase,
-    CountMeetings, FIREBASE_URL) {
+  function($scope, $rootScope, $firebase, FoodTotal,
+    CountMeals, FIREBASE_URL) {
 
   var ref = new Firebase(FIREBASE_URL + '/users/' + 
     $rootScope.currentUser.$id + '/food-diary');
@@ -11,17 +11,19 @@ myApp.controller('FoodDiaryController',
 
   mealsObj.$loaded().then(function(data) {
     $scope.meals = data;
+    $scope.goal = 1830;
     $scope.today = todaysDate;
   }); //make sure meals data is loaded
-
 
 
   $scope.addMeal = function() {
     mealsInfo.$push({
       name: $scope.mealname,
+      calories: $scope.mealcalories,
       date: Firebase.ServerValue.TIMESTAMP
     }).then(function() {
       $scope.mealname = '';
+      $scope.mealcalories = '';
     });
   }; //addmeal
 

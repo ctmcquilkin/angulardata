@@ -245,8 +245,11 @@ p.error {
 
 .btn-list { background-image: url(../images/icons/icon_list.png); }
 .btn-checkin { background-image: url(../images/icons/icon_checkmark.png); }
+.btn-share { background-image: url(../images/icons/icon_share.png); }
+.btn-search { background-image: url(../images/icons/icon_search.png); }
 .btn-delete { background-image: url(../images/icons/icon_trash.png); }
 .btn-love { background-image: url(../images/icons/icon_heart.png); }
+.btn-comment { background-image: url(../images/icons/icon_comment.png); }
 .btn-email { background-image: url(../images/icons/icon_email.png); }
 .btn-meeting { background-image:  url(../images/icons/icon_meeting.png); }
 
@@ -492,7 +495,7 @@ nav ul li a:hover {
 
 .userinfo {
   text-align: center;
-  color: #145266;
+  color: #E0E7AB;
   font-family: Bree Serif, serif;
   padding-bottom: 5px;
 }
@@ -515,7 +518,7 @@ nav ul li a:hover {
 
 .addmeeting .inputwrapper input {
     float: left;
-    width: 100%;
+    width: 50%;
 }
 
 .addmeeting button {

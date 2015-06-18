@@ -1,0 +1,52 @@
+<section class="checkins cf">
+  <form name="myform"
+    ng-submit="addRecipe()"
+    novalidate>
+
+    <h1>Share your Recipe</h1>
+    <p>Fill out this form to share your recipe on Eat Right or return to
+    <a ng-href="#/food-diary">your food diary</a></p>
+
+    <p class="error formerror" ng-show="message">{{ message }}</p>
+
+    <input type="firstname" name="firstname" placeholder="Your First Name"
+      ng-model="user.firstname" ng-required="true">
+    <p class="error validationerror"
+      ng-show="myform.firstname.$invalid && myform.firstname.$touched">
+      First Name is required</p>
+
+    <input type="recipename" name="recipename" placeholder="Recipe Name"
+      ng-model="user.recipename" ng-required="true">
+    <p class="error validationerror"
+      ng-show="myform.recipename.$invalid && myform.recipename.$touched">
+      Recipe Name is required</p>
+
+    <input type="recipeyield" name="recipeyield" placeholder="Serving / Recipe Yields"
+      ng-model="user.recipeyield" ng-required="true">
+    <p class="error validationerror"
+      ng-show="myform.recipeyield.$invalid && myform.recipeyield.$touched">
+      An estimated serving / yield is required</p>
+
+    <input type="recipeingredients" name="recipeingredients" placeholder="Recipe Ingredients"
+      ng-model="user.recipeingredients" ng-required="true">
+    <p class="error validationerror"
+      ng-show="myform.recipeingredients.$invalid && myform.recipeingredients.$touched">
+      At least one Ingredient required</p>
+      
+    <input type="recipecooktime" name="recipecooktime" placeholder="Recipe Cooktime"
+      ng-model="user.recipecooktime" ng-required="true">
+    <p class="error validationerror"
+      ng-show="myform.recipecooktime.$invalid && myform.recipecooktime.$touched">
+      Cook time is required</p>
+
+    <input type="recipeprep" name="recipeprep" placeholder="Recipe Prep"
+      ng-model="user.recipeprep" ng-required="true">
+    <p class="error validationerror"
+      ng-show="myform.recipeprep.$invalid && myform.recipeprep.$touched">
+      Preparation or a URL is required</p>
+
+    <button type="submit" class="btn"
+      ng-disabled="myform.$invalid">Share Recipe</button>
+    <p>or <a href="#/login">login</a></p>
+  </form>
+</section>
