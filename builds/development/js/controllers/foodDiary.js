@@ -9,6 +9,15 @@ myApp.controller('FoodDiaryController',
   var mealsObj = mealsInfo.$asObject();
   var todaysDate = new Date().getTime();
 
+  $scope.dateFilter = [
+  	{ name: 'today', value : 0 },
+  	{ name: 'yesterday', value : 1 },
+  	{ name: 'lastWeek', value : 2 },
+  	{ name: 'lastMonth', value : 3 }
+  ];
+	
+  $scope.dateFilter.date = $scope.dateFilter[0].value;
+
   mealsObj.$loaded().then(function(data) {
     $scope.meals = data;
     $scope.goal = 1830;
