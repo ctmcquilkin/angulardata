@@ -1,5 +1,5 @@
 var myApp = angular.module('myApp', ['ngRoute',
-'firebase', 'appControllers'])
+'firebase', 'appControllers', 'myApp.filters'])
 .constant('FIREBASE_URL', 'https://eat-right.firebaseio.com/');
 
 var appControllers = angular.module('appControllers',

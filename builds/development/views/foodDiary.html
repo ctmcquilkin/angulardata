@@ -1,7 +1,7 @@
 <div class="meetings cf">
 
   <h1>Today {{today | date:'shortDate'}}</h1>
-  <h2>goal({{goal}}) - total({{foodTotal}}) = remaining calories({{goal - foodTotal}})</h2>
+  <h2>goal({{goal}}) - total({{foodTotal}}) = calories remaining({{goal - foodTotal}})</h2>
   <form class="formgroup addmeeting cf"
     name="myform"
     ng-submit="addMeal()"
@@ -18,8 +18,16 @@
       ng-disabled="myform.$invalid">ADD</button>
   </form>
 
-  <h2>Your recent meals:</h2>
-  <div class="meeting" ng-repeat="(key, meal) in meals">
+  <h2>Your Food Diary:</h2>
+    <span class="label">Showing Meals for:</span>
+      <select ng-model="dateFilter.date">
+      	<option value="0">Today</option>
+        <option value="1">Yesterday</option>
+        <option value="2">Last Week</option>
+        <option value="3">Last Month</option>
+      </select>
+    </div><!-- formgroup -->
+  <div class="meeting" ng-repeat="(key, meal) in meals | dateFilter: dateFilter.date"> <!-- filter: { $date: dateFilter } -->
   	<span class="text">{{meal.name}} Calories: {{meal.calories}} Added on: {{meal.date | date:'short'}}</span>
 
     <a class="btn btn-search tooltip" 

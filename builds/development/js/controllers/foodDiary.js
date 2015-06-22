@@ -7,7 +7,7 @@ myApp.controller('FoodDiaryController',
 
   var mealsInfo = $firebase(ref);
   var mealsObj = mealsInfo.$asObject();
-  var todaysDate = new Date();
+  var todaysDate = new Date().getTime();
 
   mealsObj.$loaded().then(function(data) {
     $scope.meals = data;

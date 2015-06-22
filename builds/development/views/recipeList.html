@@ -57,12 +57,16 @@
         </div><!-- info -->
 
         <div class="showcheckins" ng-show="recipe.show">
+          <p>{{recipe.recipeyield}}</p>
+          <p>{{recipe.recipeingredients}}</p>
+          <p>{{recipe.recipecooktime}}</p>
+          <p>{{recipe.recipeprep}}</p>
           <form class="cf"
             ng-submit="giveLove(recipe, recipe.giftText)"
             novalidate>
             <input type="text" name="giftText"
               ng-required="true"
-              placeholder="What are you giving them?"
+              placeholder="Comments?"
               ng-model="recipe.giftText">
             <button type="submit" class="btn"
               ng-disabled="myform.$invalid">+</button>
