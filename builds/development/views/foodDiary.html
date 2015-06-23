@@ -32,11 +32,23 @@
 
     <a class="btn btn-search tooltip" 
       ng-href="#/recipes/{{currentUser.regUser}}/{{key}}/recipeList">
-      <span>Look for similar recipes on Eat Right</span></a>
+      <span>View your saved {{meal.name}} recipes</span></a>
 
+<!-- 
+    <a class="btn btn-search tooltip" 
+      ng-href="#/recipes/{{currentUser.regUser}}/{{key}}/recipeList">
+      <span>Look for similar recipes on Eat Right</span></a>
+ -->
+
+    <a class="btn btn-save tooltip" 
+      ng-href="#/recipes/{{currentUser.regUser}}/{{key}}">
+      <span>Save your {{meal.name}} Recipe</span></a>
+
+<!-- 
     <a class="btn btn-share tooltip" 
       ng-href="#/recipes/{{currentUser.regUser}}/{{key}}">
       <span>Share your Recipe</span></a>
+ -->
   
     <button class="btn btn-delete tooltip"
       ng-click="deleteMeal(key)">

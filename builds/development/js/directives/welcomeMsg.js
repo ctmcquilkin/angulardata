@@ -7,7 +7,7 @@ myApp.directive('welcomeMsg', function() {
     	if ( hour < 12 ) {
     		this.message = "Good Morning ";
     	} else if ( hour >= 12 && hour <= 24 ) {
-    		this.message = "Good Evening";
+    		this.message = "Good Evening ";
     	} else {
     		this.message = "Hi";
     	}

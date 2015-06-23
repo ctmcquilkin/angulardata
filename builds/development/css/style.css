@@ -246,6 +246,7 @@ p.error {
 .btn-list { background-image: url(../images/icons/icon_list.png); }
 .btn-checkin { background-image: url(../images/icons/icon_checkmark.png); }
 .btn-share { background-image: url(../images/icons/icon_share.png); }
+.btn-save { background-image: url(../images/icons/icon_save.png); }
 .btn-search { background-image: url(../images/icons/icon_search.png); }
 .btn-delete { background-image: url(../images/icons/icon_trash.png); }
 .btn-love { background-image: url(../images/icons/icon_heart.png); }
