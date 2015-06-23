@@ -1,7 +1,7 @@
 <div class="meetings cf">
 
   <h1>Today {{today | date:'shortDate'}}</h1>
-  <h2>daily goal({{goal}}) - today's total({{foodTotal}}) = calories remaining({{goal - foodTotal}})</h2>
+  <h2>your daily goal({{goal}}) - today's total({{foodTotal}}) = calories remaining({{goal - foodTotal}})</h2>
   <form class="formgroup addmeeting cf"
     name="myform"
     ng-submit="addMeal()"

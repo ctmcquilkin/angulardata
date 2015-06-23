@@ -27,7 +27,7 @@ angular.module('myApp.filters', []).
 				filtered_list.push(prop);
 			}
 			//console.log(prop.date);
-			console.log(range);
+			//console.log(range);
       	 });
       	 return filtered_list;
       } else if (range == 1) {
@@ -37,7 +37,7 @@ angular.module('myApp.filters', []).
 				filtered_list.push(prop);
 			}
 			//console.log(prop.date);
-			console.log(range);
+			//console.log(range);
       	 });
       	 return filtered_list;
       } else if (range == 2) {
@@ -47,7 +47,7 @@ angular.module('myApp.filters', []).
 				filtered_list.push(prop);
 			}
 			//console.log(prop.date);
-			console.log(range);
+			//console.log(range);
       	 });
       	 return filtered_list;
       } else {
