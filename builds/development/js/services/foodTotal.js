@@ -13,14 +13,16 @@ myApp.factory('FoodTotal', function($firebase,
     var sinceMidnight = new Date().getHours() * 60 * 60 * 1000; // plus or minus 60 min
     var today = new Date().getTime() - sinceMidnight;
     angular.forEach(mealsArray, function(meal, date) {
-    	if (meal.date >= today) {// 1435065742990
+    	if (meal.date >= today) {
     		foodTotal += parseInt(meal.calories);
 //     		console.log('foodTotal: ' + foodTotal);
 //     		console.log('calories is a number? ' + Number(meal.calories));
      		console.log('calories: ' + meal.calories);
 //     		console.log('calories: ' + meal.calories.valueOf());
+    	} else {
+    		foodTotal = 0;
     	}
-    	console.log(foodTotal);
+    	//console.log(foodTotal);
     	$rootScope.foodTotal = foodTotal;
 //    	$rootScope.foodTotal += parseInt(mealsArray[i].calories);
     });

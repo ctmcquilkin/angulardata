@@ -31,7 +31,7 @@ myApp.controller('RecipeController', function($scope,
       $location.path('/recipes/' + $scope.whichuser + '/' +
         $scope.whichrecipe + '/recipeList');
     });//recipesObj
-  }; //addCheckin
+  }; //addRecipe
 
 
   $scope.pickRandom = function() {
