@@ -9,12 +9,21 @@ myApp.controller('RecipeController', function($scope,
   $scope.recordId='';
   $scope.query='';
 
+  var cat = new Firebase(FIREBASE_URL + "/users/" +
+    $scope.whichuser + "/food-diary/" + 
+    $scope.whichrecipe);
+    
+  var catName = $firebase(cat).$asArray();
+  $scope.recipeName = catName;
+
   var ref = new Firebase(FIREBASE_URL + "/users/" +
     $scope.whichuser + "/food-diary/" + 
     $scope.whichrecipe + '/recipes');
 
   var recipeList = $firebase(ref).$asArray();
   $scope.recipes = recipeList;
+  //$scope.category = [{recipeList: 'name'}];
+  //console.log($scope.recipes);
 
   $scope.addRecipe = function() {
     var recipesObj = $firebase(ref);
