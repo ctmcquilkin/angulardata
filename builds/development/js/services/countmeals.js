@@ -1,6 +1,8 @@
 myApp.factory('CountMeals', function($firebase,
   $rootScope, FIREBASE_URL) {
 
+  if ($rootScope.currentUser) {
+
   var ref = new Firebase(FIREBASE_URL + '/users/' + 
     $rootScope.currentUser.$id + '/food-diary');
 
@@ -17,5 +19,9 @@ myApp.factory('CountMeals', function($firebase,
   });
 
   return true;
-
+  
+  };
+  
+  return false;
+  
 }); //CountMeals

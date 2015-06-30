@@ -9,21 +9,17 @@ myApp.controller('RecipeController', function($scope,
   $scope.recordId='';
   $scope.query='';
 
-  var cat = new Firebase(FIREBASE_URL + "/users/" +
-    $scope.whichuser + "/food-diary/" + 
-    $scope.whichrecipe);
-    
-  var catName = $firebase(cat).$asArray();
-  $scope.recipeName = catName;
+  var recipeRef = new Firebase(FIREBASE_URL+ '/recipes');
+
+  var recipeInfo = $firebase(recipeRef);
 
   var ref = new Firebase(FIREBASE_URL + "/users/" +
     $scope.whichuser + "/food-diary/" + 
     $scope.whichrecipe + '/recipes');
-
+    
+  // create reference for saving recipe name and URL
   var recipeList = $firebase(ref).$asArray();
   $scope.recipes = recipeList;
-  //$scope.category = [{recipeList: 'name'}];
-  //console.log($scope.recipes);
 
   $scope.addRecipe = function() {
     var recipesObj = $firebase(ref);
@@ -35,9 +31,18 @@ myApp.controller('RecipeController', function($scope,
       recipeingredients: $scope.user.recipeingredients,
       date: Firebase.ServerValue.TIMESTAMP
     };
+    
+    // save recipe name and URL to recipe directory
+    recipeInfo.$push({
+      recipename: $scope.user.recipename,
+      recipeURL: FIREBASE_URL + "/users/" +
+      $scope.whichuser + "/food-diary/" + 
+      $scope.whichrecipe + '/recipes',
+      date: Firebase.ServerValue.TIMESTAMP
+    })
 
     recipesObj.$push(myData).then(function() {
-      $location.path('/recipes/' + $scope.whichuser + '/' +
+      $location.path('/recipes' + $scope.whichuser + '/' +
         $scope.whichrecipe + '/recipeList');
     });//recipesObj
   }; //addRecipe

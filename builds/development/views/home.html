@@ -1,0 +1,41 @@
+<section>
+    <h1>Welcome to Eat Right!</h1>
+    <p>Eat Right is a light calorie counter built around recipes to help you eat
+    better. Register or Log-in to start your own food diary to keep track of your
+    favorite recipes and watch your calories or browse recipes below:</p>
+    <ul class="awardslist userlist cf" ng-repeat="recipe in recipes track by $index">
+    	<li class="cf">
+    		<form>
+				<div class="award">
+					{{recipe}}
+					<div class="buttons">
+						<button class="btn btn-cat btn-recipe tooltip">
+							<span>
+							Explore salad recipes
+							</span>
+						</button>
+					</div>
+				</div>
+			</form>
+    	</li>
+
+<!-- 
+    	<li class="cf">
+    		<form action="#/recipes/simplelogin:2/-Jr2wktaXG4IkWrNaILw/recipeList">
+				<div class="award">
+					{{recipe.recipename}}
+					<div class="buttons">
+						<button class="btn btn-cat btn-recipe tooltip">
+							<span>
+							Explore soup recipes
+							</span>
+						</button>
+					</div>
+				</div>
+			</form>
+    	</li>
+ -->
+    </ul>
+</section>
+
+<section class="cf" ng-include="'views/login.html'"></section>

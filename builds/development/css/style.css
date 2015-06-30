@@ -249,6 +249,7 @@ p.error {
 .btn-save { background-image: url(../images/icons/icon_save.png); }
 .btn-search { background-image: url(../images/icons/icon_search.png); }
 .btn-delete { background-image: url(../images/icons/icon_trash.png); }
+.btn-recipe { background-image: url(../images/icons/icon_recipe.png); }
 .btn-love { background-image: url(../images/icons/icon_heart.png); }
 .btn-comment { background-image: url(../images/icons/icon_comment.png); }
 .btn-email { background-image: url(../images/icons/icon_email.png); }
@@ -437,6 +438,14 @@ ul.awardslist li:hover {
 }
 
 ul.awardslist li .btn-delete {
+  background-color: transparent;
+  background-size: 15px 15px;
+  background-position: center 40%;
+  margin:0;
+  border: none;
+}
+
+ul.awardslist li .btn-cat {
   background-color: transparent;
   background-size: 15px 15px;
   background-position: center 40%;

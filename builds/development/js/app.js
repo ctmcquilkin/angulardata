@@ -17,6 +17,14 @@ myApp.run(['$rootScope', '$location', function($rootScope, $location) {
 
 myApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider.
+    when('/', {
+      templateUrl: 'views/home.html',
+      controller:  'HomeController'
+    }).
+    when('/recipes/', {
+      templateUrl: 'views/browseRecipes.html',
+      controller:  'BrowseController'
+    }).
     when('/login', {
       templateUrl: 'views/login.html',
       controller:  'RegistrationController'
