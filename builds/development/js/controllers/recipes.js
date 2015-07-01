@@ -10,7 +10,6 @@ myApp.controller('RecipeController', function($scope,
   $scope.query='';
 
   var recipeRef = new Firebase(FIREBASE_URL+ '/recipes');
-
   var recipeInfo = $firebase(recipeRef);
 
   var ref = new Firebase(FIREBASE_URL + "/users/" +
@@ -35,7 +34,7 @@ myApp.controller('RecipeController', function($scope,
     // save recipe name and URL to recipe directory
     recipeInfo.$push({
       recipename: $scope.user.recipename,
-      recipeURL: FIREBASE_URL + "/users/" +
+      recipeURL: FIREBASE_URL + "users/" +
       $scope.whichuser + "/food-diary/" + 
       $scope.whichrecipe + '/recipes',
       date: Firebase.ServerValue.TIMESTAMP
@@ -68,28 +67,28 @@ myApp.controller('RecipeController', function($scope,
     }
   }; //showLove
 
-  $scope.giveLove = function(myItem, myGift) {
+  $scope.giveLove = function(myItem, myComment) {
     var refLove = new Firebase(FIREBASE_URL + '/users/'+
       $scope.whichuser + '/food-diary/' +
       $scope.whichrecipe + '/recipes/' + myItem.$id +
-      '/awards');
+      '/comments');
     var recipesObj = $firebase(refLove);
 
     var myData = {
-      name: myGift,
+      name: myComment,
       date: Firebase.ServerValue.TIMESTAMP
     };
 
     recipesObj.$push(myData);
   }; //giveLove
 
-  $scope.deleteLove = function(recipeId, award) {
+  $scope.deleteLove = function(recipeId, comment) {
     var refLove = new Firebase(FIREBASE_URL + '/users/'+
       $scope.whichuser + '/food-diary/' +
       $scope.whichrecipe + '/recipes/' + recipeId +
-      '/awards');
+      '/comments');
     var record = $firebase(refLove);
-    record.$remove(award);
+    record.$remove(comment);
   }; //deleteLove
 
 }); //RecipeController

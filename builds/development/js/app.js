@@ -21,7 +21,7 @@ myApp.config(['$routeProvider', function($routeProvider) {
       templateUrl: 'views/home.html',
       controller:  'HomeController'
     }).
-    when('/recipes/', {
+    when('/recipes/:mId', {
       templateUrl: 'views/browseRecipes.html',
       controller:  'BrowseController'
     }).
