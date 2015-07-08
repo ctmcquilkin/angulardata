@@ -6,7 +6,7 @@
     <h1>Share your Recipe</h1>
     <p>Fill out this form to share your recipe on Eat Right or return to
     <a ng-href="#/food-diary">your food diary</a></p>
-
+    
     <p class="error formerror" ng-show="message">{{ message }}</p>
 
     <input type="firstname" name="firstname" placeholder="Your First Name"
@@ -44,6 +44,8 @@
     <p class="error validationerror"
       ng-show="myform.recipeprep.$invalid && myform.recipeprep.$touched">
       Preparation or a URL is required</p>
+      
+    <tag-manager tags="tags"></tag-manager>
 
     <button type="submit" class="btn"
       ng-disabled="myform.$invalid">Share Recipe</button>

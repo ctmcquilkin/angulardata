@@ -1,0 +1,20 @@
+<div class="checkinslist">
+  <h1>Browse {{whichrecipe}} Recipes</h1>
+  <p>{{whichrecipe}} Recipes on Eat Right</p>
+  
+    <ul class="awardslist userlist cf">
+    	<li class="cf" ng-repeat="tags in taggedRecipes">
+    		<form>
+				<div class="award">
+					{{tags.$id}}
+					<div class="buttons">
+						<a class="btn btn-cat btn-recipe tooltip" href="#/{{tags.recipeURL}}"> <!-- http://localhost:8000/#/recipes/simplelogin:4/2/recipeList -->
+							<span>
+							Explore {{tags.$id}} recipes
+							</span>
+						</a>
+					</div>
+				</div>
+			</form>
+    	</li>
+</div>

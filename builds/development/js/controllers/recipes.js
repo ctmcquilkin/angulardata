@@ -8,42 +8,54 @@ myApp.controller('RecipeController', function($scope,
   $scope.direction= null;
   $scope.recordId='';
   $scope.query='';
+  $scope.tags = [];
+  
+  var hour = new Date().getHours();
+  if ( hour < 12 ) {
+  	$scope.tags = [ 'breakfast' ];
+  } else if ( hour >= 12 && hour <= 24 ) {
+	$scope.tags = [ 'lunch' ];
+  } else {
+	$scope.tags = [ 'snack' ];
+  };
 
   var ref = new Firebase(FIREBASE_URL + "/users/" +
     $scope.whichuser + "/food-diary/" + 
     $scope.whichrecipe + '/recipes');
     
-  var recipeList = $firebase(ref).$asArray();
-  $scope.recipes = recipeList;
+  var recipeList = $firebase(ref);
+  $scope.recipes = recipeList.$asArray();
+  
+  var tagsRef = new Firebase(FIREBASE_URL+ '/tags/' + $scope.tags);
+  var recipeTags = $firebase(tagsRef);
 
   $scope.addRecipe = function() {
     var recipesObj = $firebase(ref);
-    var tagsRef = new Firebase(FIREBASE_URL+ '/tags/' + $scope.user.recipename); // recipe name needs to be replaced with tag name
-  	var recipeTags = $firebase(tagsRef);
 
     var myData = {
       firstname: $scope.user.firstname,
       recipename: $scope.user.recipename,
       recipeyield: $scope.user.recipeyield,
       recipeingredients: $scope.user.recipeingredients,
+      recipeTags: $scope.tags, 
       date: Firebase.ServerValue.TIMESTAMP
     };
-    
-    // save recipe name and URL to recipe directory
-    recipeTags.$push({
-      recipename: $scope.user.recipename, // replace with tag name!
-      recipeURL: FIREBASE_URL + "users/" +
-      $scope.whichuser + "/food-diary/" + 
-      $scope.whichrecipe + '/recipes',
-      date: Firebase.ServerValue.TIMESTAMP
-    })
 
     recipesObj.$push(myData).then(function() {
       $location.path('/recipes/' + $scope.whichuser + '/' +
         $scope.whichrecipe + '/recipeList');
     });//recipesObj
-  }; //addRecipe
+    
+    // save recipe name and URL to recipe directory
+    recipeTags.$push({
+	  foodDiaryID: $scope.whichrecipe, // need to add KEY
+      recipeURL: "users/" + $scope.whichuser + "/food-diary/" + 
+      $scope.whichrecipe + '/recipeList',
+      date: Firebase.ServerValue.TIMESTAMP
+    });
 
+
+  }; //addRecipe
 
   $scope.pickRandom = function() {
     var whichRecord = Math.round(Math.random() * recipeList.length);

@@ -4,15 +4,30 @@
     better. Register or Log-in to start your own food diary to keep track of your
     favorite recipes and watch your calories or browse recipes below:</p>
     <ul class="awardslist userlist cf">
-    	<li class="cf" ng-repeat="(key, recipe) in recipes">
+    	<li class="cf" ng-repeat="tags in recipeTags">
+    		<form>
+				<div class="award">
+					{{tags.$id}}
+					<div class="buttons">
+						<a class="btn btn-cat btn-recipe tooltip" href="#/tags/{{tags.$id}}">
+							<span>
+							Explore {{tags.$id}} recipes
+							</span>
+						</a>
+					</div>
+				</div>
+			</form>
+    	</li>
+<!-- 
 				<div class="award buttons">
 					{{recipe.recipename}}
 					<a class="btn btn-cat btn-recipe tooltip" ng-href="#/recipes/{{key}}">
 					<span>View your saved {{recipe.recipename}} recipes</span></a>
 				</div>
     	</li>
+ -->
 
-<!-- 
+<!--  #/recipes/{{currentUser.regUser}}{{key}}
     	<li class="cf">
     		<form action="#/recipes/simplelogin:2/-Jr2wktaXG4IkWrNaILw/recipeList">
 				<div class="award">

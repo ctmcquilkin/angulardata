@@ -21,8 +21,8 @@ myApp.config(['$routeProvider', function($routeProvider) {
       templateUrl: 'views/home.html',
       controller:  'HomeController'
     }).
-    when('/recipes/:mId', {
-      templateUrl: 'views/browseRecipes.html',
+    when('/tags/:mId', {
+      templateUrl: 'views/recipeCategory.html',
       controller:  'BrowseController'
     }).
     when('/login', {
