@@ -19,10 +19,10 @@ myApp.controller('HomeController', function($scope,
 		//if (data[tag] === '$id' ) { tags.push(value) };
 		//tags.push(data['$id']);
 		//console.log(tags);
-		console.log(tag+': '+item+' = '+value);
+		//console.log(tag+': '+item+' = '+value);
 	  });
 	});
-	console.log(JSON.stringify(data, null, 2));
+	//console.log(JSON.stringify(data, null, 2));
 
   }); //make sure meals data is loaded
 

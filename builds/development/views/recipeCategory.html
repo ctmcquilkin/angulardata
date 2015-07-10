@@ -1,20 +1,128 @@
 <div class="checkinslist">
   <h1>Browse {{whichrecipe}} Recipes</h1>
-  <p>{{whichrecipe}} Recipes on Eat Right</p>
-  
+  <p>Recipes Tagged: {{whichrecipe}} on Eat Right</p>
+ 
+   <div class="search cf">
+    <H2>Search {{whichrecipe}} Recipies</H2>
+    <input type="text" ng-model="query" placeholder="Search for {{whichrecipe}} Recipies">
+
+    <div class="formgroup cf">
+      <span class="label">filter by:</span>
+      <select ng-model="order">
+        <option value="date">Date</option>
+      </select>
+    </div><!-- formgroup -->
+
+    <div class="formgroup cf">
+      <input id="dirascending" type="radio" ng-model="direction"
+        name="direction">
+      <label for=dirascending>asc</label>
+      <input id="dirdescending" type="radio" ng-model="direction"
+        name="direction" value="reverse">
+      <label for=dirdescending>desc</label>
+    </div><!-- formgroup -->
+
+    <div ng-show="currentUser" class="buttons cf">
+      <button ng-hide="recordId" class="btn btn-pick"
+        ng-click="pickRandom()">Pick Random</button>
+
+      <button ng-show="recordId" type="button" class="btn btn-pick"
+        ng-click="recordId=''">Reset</button>
+    </div><!-- buttons -->
+
+  </div><!-- search -->
+<ul class="recipes">
+  <li class="recipe shadow" ng-repeat="tags in taggedRecipes | 
+  orderBy: order:direction | filter: { $id: recordId,
+  $: query}">
+    <img src="http://www.lorempixel.com/164/108/food/" />
+    <h1>{{tags.recipeName}}</h1>
+    <h2>By: {{tags.recipeAuthor}}</h2>
+    <p>Prep Time: {{tags.recipeCooktime}}</p>
+	<a class="btn btn-cat btn-recipe tag tooltip"
+	href="#/tags/{{whichrecipe}}">
+	{{whichrecipe}}
+	<span>Explore {{whichrecipe}} recipes</span></a>
+  </li>
+</ul>
+
+<!-- 
     <ul class="awardslist userlist cf">
-    	<li class="cf" ng-repeat="tags in taggedRecipes">
+    	<li class="cf" ng-repeat="tags in taggedRecipes | 
+      	orderBy: order:direction | filter: { $id: recordId,
+      	$: query}">
     		<form>
 				<div class="award">
-					{{tags.$id}}
+					{{tags.recipeName}} Added on: {{tags.date | date:'short'}} By: {{tags.recipeAuthor}} Prep Time: {{tags.recipeCooktime}} Tags:
+					<img src="{{tags.images}}" alt="{{whichrecipe}}">
 					<div class="buttons">
-						<a class="btn btn-cat btn-recipe tooltip" href="#/{{tags.recipeURL}}"> <!-- http://localhost:8000/#/recipes/simplelogin:4/2/recipeList -->
+						<a class="btn btn-cat btn-recipe tooltip" href="#/{{tags.recipeURL}}"> <!~~ http://localhost:8000/#/recipes/simplelogin:4/2/recipeList ~~>
 							<span>
-							Explore {{tags.$id}} recipes
+							Explore Your {{tags.$id}} recipes
 							</span>
 						</a>
 					</div>
 				</div>
 			</form>
     	</li>
+    </ul>
+ -->
+
 </div>
+
+<!-- 
+  <ul class="userlist cf">
+    <li ng-class="recipe.userState" 
+      ng-repeat="tags in taggedRecipes | 
+      orderBy: order:direction | filter: { $id: recordId,
+      $: query}">
+      <div class="checkin">
+        <div class="buttons" ng-show="currentUser">
+          <button class="btn btn-delete tooltip"
+            confirmation-needed = "Are you sure you want to delete this recipe?"
+            ng-click="deleteRecipe(recipe.$id)">
+          <span>Delete this recipe</span></button>
+          <button class="btn btn-comment tooltip"
+            ng-click="showLove(recipe)">
+            <span>Show the love</span></button>
+        </div> <!~~ buttons ~~>
+        <div class="info">
+          <h2>{{recipe.firstname}}'s {{tags.$id}}</h2>
+          <div class="date">
+            {{ recipe.date | date: "MMM d, yy h:mm a"}}
+          </div><!~~ date ~~>
+        </div><!~~ info ~~>
+
+        <div class="showcheckins" ng-show="recipe.show">
+          <p>{{recipe.recipeyield}}</p>
+          <p>{{recipe.recipeingredients}}</p>
+          <p>{{recipe.recipecooktime}}</p>
+          <p>{{recipe.recipeprep}}</p>
+          <form class="cf"
+            ng-submit="giveLove(recipe, recipe.giftText)"
+            novalidate>
+            <input type="text" name="giftText"
+              ng-required="true"
+              placeholder="Comments?"
+              ng-model="recipe.giftText">
+            <button type="submit" class="btn"
+              ng-disabled="myform.$invalid">+</button>
+          </form>
+
+          <ul class="awardslist cf">
+            <li class="cf" ng-repeat="(key,comment) in recipe.comments">
+              <div class="award">{{comment.name}}
+                <div class="buttons" ng-show="currentUser">
+                  <button class="btn btn-delete tooltip"
+                    confirmation-needed = "Are you sure you want to delete this comment?"
+                    ng-click="deleteLove(recipe.$id,key)">
+                    <span>Delete this comment</span></button>
+                </div><!~~ buttons ~~>
+              </div><!~~ comment ~~>
+            </li>            
+          </ul>
+        </div><!~~ showrecipes ~~>
+      </div><!~~ recipe ~~>
+    </li>
+  </ul>  
+ -->

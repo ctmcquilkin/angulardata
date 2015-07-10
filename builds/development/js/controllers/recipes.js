@@ -24,6 +24,7 @@ myApp.controller('RecipeController', function($scope,
     $scope.whichrecipe + '/recipes');
     
   var recipeList = $firebase(ref);
+  var recipeArray = recipeList.$asArray();
   $scope.recipes = recipeList.$asArray();
   
   var tagsRef = new Firebase(FIREBASE_URL+ '/tags/' + $scope.tags);
@@ -37,6 +38,7 @@ myApp.controller('RecipeController', function($scope,
       recipename: $scope.user.recipename,
       recipeyield: $scope.user.recipeyield,
       recipeingredients: $scope.user.recipeingredients,
+      recipeCooktime: $scope.user.recipecooktime,
       recipeTags: $scope.tags, 
       date: Firebase.ServerValue.TIMESTAMP
     };
@@ -49,8 +51,14 @@ myApp.controller('RecipeController', function($scope,
     // save recipe name and URL to recipe directory
     recipeTags.$push({
 	  foodDiaryID: $scope.whichrecipe, // need to add KEY
-      recipeURL: "users/" + $scope.whichuser + "/food-diary/" + 
+      recipeURL: FIREBASE_URL + "users/" +
+      $scope.whichuser + "/food-diary/" + 
+      $scope.whichrecipe + '/recipes',
+      recipeBrowseURL: "users/" + $scope.whichuser + "/food-diary/" + 
       $scope.whichrecipe + '/recipeList',
+      recipeName: $scope.user.recipename,
+      recipeCooktime: $scope.user.recipecooktime,
+      recipeAuthor: $scope.user.firstname,
       date: Firebase.ServerValue.TIMESTAMP
     });
 
@@ -58,9 +66,9 @@ myApp.controller('RecipeController', function($scope,
   }; //addRecipe
 
   $scope.pickRandom = function() {
-    var whichRecord = Math.round(Math.random() * recipeList.length);
-    $scope.recordId = recipeList.$keyAt(whichRecord);
-  }; //pick winner
+    var whichRecord = Math.round(Math.random() * recipeArray.length);
+    $scope.recordId = recipeArray.$keyAt(whichRecord);
+  }; //pick random recipe
 
   $scope.deleteRecipe = function(id) {
     var record = $firebase(ref);

@@ -505,7 +505,7 @@ nav ul li a:hover {
 
 .userinfo {
   text-align: center;
-  color: #E0E7AB;
+  color: #444;
   font-family: Bree Serif, serif;
   padding-bottom: 5px;
 }
@@ -632,4 +632,73 @@ nav ul li a:hover {
 
 .tagInput { 
     width: 85%;
+}
+.tag {
+	width: auto;
+	padding: 0px 5px 0px 30px;
+	margin: 2px;
+	background-color: #C61C6F;
+	color: #FFF;
+	font-weight: normal;
+	border-radius: 20px;
+	font-family: "Bree Serif",sans-serif;
+	background-position: left 10px center;
+}
+.shadow {
+  -moz-box-shadow:    0x 1px 2px 2px #ccc;
+  -webkit-box-shadow: 0 1px 2px 2px #ccc;
+  box-shadow:         0 1px 2px 2px #ccc;
+}
+img {
+  max-width:100%;
+  vertical-align:bottom;
+}
+.recipes {
+  width:80%;
+  padding: 10px 10px 0 10px;
+  margin: 0 auto;
+  list-style: none;
+/*   background: #FAFAFA; */
+  
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  
+  -webkit-flex-flow: row wrap;
+  flex-flow: row wrap;
+  
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+/* 
+.recipes h1 {
+  margin:10px 0 0;
+  font:normal bold 16px/1 sans-serif;
+}
+.recipes h2 {
+  color: #CCC;
+  margin:5px 0 0;
+  font:normal 14px/1 sans-serif;
+}
+ */
+ .recipes img {
+   border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 4px 0px black;
+    box-shadow: 5px 5px 20px rgba(0,0,0,0.2);
+ }
+
+.recipe {
+  -webkit-flex: 0 0 auto;
+  flex: 0 0 auto;
+  
+  margin-bottom:10px;
+/*   padding:10px; */
+  background:#FFF;
+  color: #CCC;
+  text-align: center;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 4px 0px black;
+    box-shadow: 5px 5px 20px rgba(0,0,0,0.2);
 }

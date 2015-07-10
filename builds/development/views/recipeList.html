@@ -33,7 +33,6 @@
     </div><!-- buttons -->
 
   </div><!-- search -->
-
   <ul class="userlist cf">
     <li ng-class="recipe.userState" 
       ng-repeat="recipe in recipes | 
@@ -47,7 +46,7 @@
           <span>Delete this recipe</span></button>
           <button class="btn btn-comment tooltip"
             ng-click="showLove(recipe)">
-            <span>Show the love</span></button>
+            <span>Comments/Details</span></button>
         </div> <!-- buttons -->
         <div class="info">
           <h2>{{recipe.firstname}}'s {{recipe.recipename}}</h2>
@@ -57,10 +56,14 @@
         </div><!-- info -->
 
         <div class="showcheckins" ng-show="recipe.show">
-          <p>{{recipe.recipeyield}}</p>
-          <p>{{recipe.recipeingredients}}</p>
-          <p>{{recipe.recipecooktime}}</p>
-          <p>{{recipe.recipeprep}}</p>
+          <p>Yield: {{recipe.recipeyield}}</p>
+          <p>Prep Time: {{recipe.recipeCooktime}}</p>
+		  <a class="btn btn-cat btn-recipe tag tooltip"
+			href="#/tags/{{value}}"
+			ng-repeat="(key, value) in recipe.recipeTags">
+			<!-- {{key}} :  -->{{value}}
+			<span>Explore {{value}} recipes</span></a>
+
           <form class="cf"
             ng-submit="giveLove(recipe, recipe.giftText)"
             novalidate>
@@ -81,11 +84,11 @@
                     ng-click="deleteLove(recipe.$id,key)">
                     <span>Delete this comment</span></button>
                 </div><!-- buttons -->
-              </div><!-- award -->
+              </div><!-- comment -->
             </li>            
           </ul>
-        </div><!-- showcheckins -->
-      </div><!-- checkin -->
+        </div><!-- showrecipes -->
+      </div><!-- recipe -->
     </li>
   </ul>
 </div>
