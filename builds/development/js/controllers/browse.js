@@ -9,6 +9,9 @@ myApp.controller('BrowseController', function($scope,
   $scope.query='';
   var ref = new Firebase(FIREBASE_URL + '/tags/' + $scope.whichrecipe);
   
+  var allTags = new Firebase(FIREBASE_URL + '/tags/');
+  var all = $firebase(allTags);
+  $scope.tagList = all.$asArray();  
 
   var tags = $firebase(ref);
   var tagsArray = tags.$asArray();

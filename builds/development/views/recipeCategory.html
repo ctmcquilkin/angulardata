@@ -1,6 +1,6 @@
 <div class="checkinslist">
-  <h1>Browse {{whichrecipe}} Recipes</h1>
-  <p>Recipes Tagged: {{whichrecipe}} on Eat Right</p>
+  <h1>{{whichrecipe}} Recipes</h1>
+  <p>Browse recipes Tagged: {{whichrecipe}} on Eat Right</p>
  
    <div class="search cf">
     <H2>Search {{whichrecipe}} Recipies</H2>
@@ -10,6 +10,11 @@
       <span class="label">filter by:</span>
       <select ng-model="order">
         <option value="date">Date</option>
+<!-- 
+        <option value="date">Meal Type</option>
+        <option value="date">Cuisine</option>
+        <option value="date">Prep</option>
+ -->
       </select>
     </div><!-- formgroup -->
 
@@ -20,6 +25,12 @@
       <input id="dirdescending" type="radio" ng-model="direction"
         name="direction" value="reverse">
       <label for=dirdescending>desc</label>
+    </div><!-- formgroup -->
+    
+    <div class="formgroup cf">
+      <span class="label">tags:</span>
+      <p ng-repeat="tag in tagList"><a class="btn btn-cat btn-recipe tag tooltip"
+	href="#/tags/{{tag.$id}}">{{tag.$id}}</a></p>
     </div><!-- formgroup -->
 
     <div ng-show="currentUser" class="buttons cf">
@@ -35,7 +46,9 @@
   <li class="recipe shadow" ng-repeat="tags in taggedRecipes | 
   orderBy: order:direction | filter: { $id: recordId,
   $: query}">
+  	<a class="btn btn-list tooltip" href="#/recipe/{{tags.$id}}/">
     <img src="http://www.lorempixel.com/164/108/food/" />
+    </a>
     <h1>{{tags.recipeName}}</h1>
     <h2>By: {{tags.recipeAuthor}}</h2>
     <p>Prep Time: {{tags.recipeCooktime}}</p>
