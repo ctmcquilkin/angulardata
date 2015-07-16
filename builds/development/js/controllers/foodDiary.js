@@ -3,10 +3,11 @@ myApp.controller('FoodDiaryController',
     CountMeals, FIREBASE_URL) {
 
   var ref = new Firebase(FIREBASE_URL + '/users/' + 
-    $rootScope.currentUser.$id + '/food-diary');
+    $rootScope.currentUser.$id + '/food-diary/');
 
-  var mealsInfo = $firebase(ref);
-  var mealsObj = mealsInfo.$asObject();
+  var meals = $firebase(ref);
+  $scope.meals = meals.$asObject();
+  
   var todaysDate = new Date().getTime();
 
   $scope.dateFilter = [
@@ -18,7 +19,7 @@ myApp.controller('FoodDiaryController',
 	
   $scope.dateFilter.date = $scope.dateFilter[0].value;
 
-  mealsObj.$loaded().then(function(data) {
+  $scope.meals.$loaded().then(function(data) {
     $scope.meals = data;
     $scope.goal = 1830;
     $scope.today = todaysDate;
@@ -26,7 +27,7 @@ myApp.controller('FoodDiaryController',
 
 
   $scope.addMeal = function() {
-    mealsInfo.$push({
+    meals.$push({
       name: $scope.mealname,
       calories: $scope.mealcalories,
       date: Firebase.ServerValue.TIMESTAMP
@@ -37,7 +38,8 @@ myApp.controller('FoodDiaryController',
   }; //addmeal
 
   $scope.deleteMeal = function(key) {
-    mealsInfo.$remove(key);
+    meals.$remove(key);
+    console.log(key);
   }; //deleteMeal
 
 

@@ -43,7 +43,7 @@ myApp.config(['$routeProvider', function($routeProvider) {
     }).
     when('/recipe/:mId', {
       templateUrl: 'views/recipe.html',
-      controller:  'BrowseController'
+      controller:  'RecipeListingController'
     }).
     when('/food-diary', {
       templateUrl: 'views/foodDiary.html',

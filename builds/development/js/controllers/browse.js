@@ -8,6 +8,7 @@ myApp.controller('BrowseController', function($scope,
   $scope.recordId='';
   $scope.query='';
   var ref = new Firebase(FIREBASE_URL + '/tags/' + $scope.whichrecipe);
+  var recipeRef = new Firebase(FIREBASE_URL + '/recipes/' + $scope.whichrecipe);
   
   var allTags = new Firebase(FIREBASE_URL + '/tags/');
   var all = $firebase(allTags);
@@ -28,10 +29,10 @@ myApp.controller('BrowseController', function($scope,
 		//if (data[tag] === '$id' ) { tags.push(value) };
 		//tags.push(data['$id']);
 		//console.log(tags);
-		console.log(tag+': '+item+' = '+value);
+		//console.log(tag+': '+item+' = '+value);
 	  });
 	});
-	console.log(JSON.stringify(data, null, 2));
+	//console.log(JSON.stringify(data, null, 2));
 
   }); //make sure meals data is loaded
 

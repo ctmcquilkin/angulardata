@@ -17,7 +17,7 @@ myApp.factory('FoodTotal', function($firebase,
     		foodTotal += parseInt(meal.calories);
 //     		console.log('foodTotal: ' + foodTotal);
 //     		console.log('calories is a number? ' + Number(meal.calories));
-     		console.log('calories: ' + meal.calories);
+//     		console.log('calories: ' + meal.calories);
 //     		console.log('calories: ' + meal.calories.valueOf());
     	} else {
     		foodTotal = 0;

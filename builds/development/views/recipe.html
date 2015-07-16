@@ -1,9 +1,17 @@
 <div class="checkinslist">
 
-  <h1>Recipes Name</h1>
-  <p>Recipe Tag ID: {{whichrecipe}}</p>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-  <div class="cd-content"></div>
+  <h1>{{recipe.recipeName}}</h1>
+  <img src="http://www.lorempixel.com/164/108/food/" />
+  <p>By: {{recipe.recipeAuthor}} Prep time: {{recipe.recipeCooktime}} Servings: {{recipe.recipeyield}}</p>
+  <div class="meeting"> 
+  	<p>Ingredients: {{recipe.recipeingredients}}</p>
+  	<p>Ingredients: {{recipe.recipePrep}}</p>
+  	<p>Tags:
+		<a class="btn btn-cat btn-recipe tag tooltip"
+		href="#/tags/{{value}}"
+		ng-repeat="(key, value) in recipe.recipeTags">
+		<!-- {{key}} :  -->{{value}}
+		<span>Explore {{value}} recipes</span></a>
+	</p>
+  </div>
 </div>

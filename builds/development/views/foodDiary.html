@@ -27,7 +27,7 @@
         <option value="3">All</option>
       </select>
     </div><!-- formgroup -->
-  <div class="meeting" ng-repeat="(key, meal) in meals | dateFilter: dateFilter.date"> <!-- filter: { $date: dateFilter } -->
+  <div class="meeting" ng-repeat="(key, meal) in meals"> <!-- | dateFilter: dateFilter.date -->
   	<span class="text">{{meal.name}} Calories: {{meal.calories}} Added on: {{meal.date | date:'short'}}</span>
 
     <a class="btn btn-search tooltip" 

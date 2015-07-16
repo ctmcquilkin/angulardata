@@ -27,41 +27,76 @@ myApp.controller('RecipeController', function($scope,
   var recipeArray = recipeList.$asArray();
   $scope.recipes = recipeList.$asArray();
   
-  var tagsRef = new Firebase(FIREBASE_URL+ '/tags/' + $scope.tags);
+  var tagsRef = new Firebase(FIREBASE_URL+ '/tags/');
   var recipeTags = $firebase(tagsRef);
 
   $scope.addRecipe = function() {
-    var recipesObj = $firebase(ref);
-
-    var myData = {
+    var UserRecipesObj = $firebase(ref);
+    var rRef = new Firebase(FIREBASE_URL);
+    var recipeRef = rRef.child('recipes');
+ 
+     var myData = {
       firstname: $scope.user.firstname,
       recipename: $scope.user.recipename,
-      recipeyield: $scope.user.recipeyield,
-      recipeingredients: $scope.user.recipeingredients,
-      recipeCooktime: $scope.user.recipecooktime,
       recipeTags: $scope.tags, 
       date: Firebase.ServerValue.TIMESTAMP
     };
 
-    recipesObj.$push(myData).then(function() {
+    UserRecipesObj.$push(myData).then(function() {
       $location.path('/recipes/' + $scope.whichuser + '/' +
         $scope.whichrecipe + '/recipeList');
-    });//recipesObj
+    });//UserRecipesObj
     
-    // save recipe name and URL to recipe directory
-    recipeTags.$push({
-	  foodDiaryID: $scope.whichrecipe, // need to add KEY
-      recipeURL: FIREBASE_URL + "users/" +
-      $scope.whichuser + "/food-diary/" + 
-      $scope.whichrecipe + '/recipes',
-      recipeBrowseURL: "users/" + $scope.whichuser + "/food-diary/" + 
-      $scope.whichrecipe + '/recipeList',
-      recipeName: $scope.user.recipename,
-      recipeCooktime: $scope.user.recipecooktime,
-      recipeAuthor: $scope.user.firstname,
-      date: Firebase.ServerValue.TIMESTAMP
-    });
+	var keys = [];
+	ref.on('child_added', function(snap) {
+		var key = snap.key();
+		//console.log(key);
+		keys.push(key);
+	});
+	var lastRecipeKey = keys[keys.length -1];
+	//console.log(keys[keys.length -1]); // FIREBASE KEY OF Recipe Entry
+    
+    // save Recipe Key to tag directory under tag (user recipe id and tag id are identical)
+    for (var i = 0; i < $scope.tags.length; i++) {
+		var recipeID = tagsRef.child($scope.tags[i] + '');
+		var recipeTags = $firebase(recipeID);
+		$scope.recipeTagAttr = recipeTags.$asArray();
+		recipeID.child(lastRecipeKey).set({
+			recipeName: $scope.user.recipename,
+			recipeAuthor: $scope.user.firstname,
+			recipeCooktime: $scope.user.recipecooktime,
+			date: Firebase.ServerValue.TIMESTAMP
+		});
+	};
+	// save recipe to recipe directory
+	recipeRef.child(lastRecipeKey).set({
+		recipeName: $scope.user.recipename,
+		recipeAuthor: $scope.user.firstname,
+        recipeyield: $scope.user.recipeyield,
+        recipeingredients: $scope.user.recipeingredients,
+		recipeCooktime: $scope.user.recipecooktime,
+        recipePrep: $scope.user.recipeprep,
+        recipeTags: $scope.tags, 
+		date: Firebase.ServerValue.TIMESTAMP
+	});
 
+//     recipeTags.$push({
+// 	  foodDiaryID: lastRecipeKey, 
+// //       recipeBrowseURL: "users/" + $scope.whichuser + "/food-diary/" + 
+// //       $scope.whichrecipe + '/recipeList',
+//       recipeName: $scope.user.recipename,
+//       recipeCooktime: $scope.user.recipecooktime,
+//       recipeAuthor: $scope.user.firstname,
+//       date: Firebase.ServerValue.TIMESTAMP
+//     });
+
+// 	var keys = [];
+// 	tagsRef.on('child_added', function(snap) {
+// 		var key = snap.key();
+// 		//console.log(key);
+// 		keys.push(key);
+// 	});
+// 	console.log(keys[0]); // FIREBASE KEY OF TAG
 
   }; //addRecipe
 
@@ -110,3 +145,41 @@ myApp.controller('RecipeController', function($scope,
   }; //deleteLove
 
 }); //RecipeController
+
+//     tagsRef.on('value', function(tagSnapshot) {
+//     	var key = tagSnapshot.key();
+//     	var ref = tagSnapshot.ref();
+//     	var name = tagSnapshot.name();
+//     	var data = tagSnapshot.val();
+//     	console.log(key); // tag
+//     	//console.log(ref);
+//     	//console.log(name); // tag
+//     	// loop below prints the tags for the current tag as an object:
+// 		for (var key in data) {
+// 		  if (data.hasOwnProperty(key)) {
+// 			alert(key + " -> " + data[key]);
+// 		  }
+// 		}
+//     	//console.log(data.name);
+//     });
+// 	tagsRef.once("value", function(allTagsSnapshot) {
+// 		var properties = [];
+// 		var sorted = [];
+// 		allTagsSnapshot.forEach(function(tagSnapshot) {
+// 			var key = tagSnapshot.key();
+// 			var uid = tagSnapshot.child('recipeName').val();
+// 			var text = tagSnapshot.child('recipeAuthor').val();
+// 			var date = tagSnapshot.child('date').val();
+// 			properties.push(key, date);
+// 			//console.log(properties);
+// 			//console.log(uid);
+// 			//console.log(text);
+// 			//console.log(key);
+// 		});
+// 		properties.sort(function(a, b) {
+// 			return parseFloat(a.date) - parseFloat(b.date);
+// 		});
+// // 		var lastIndex = properties.length - 1;
+// 		//var last = properties.slice(-1).pop(); 
+// 		//console.log(properties[last]);
+// 	});
