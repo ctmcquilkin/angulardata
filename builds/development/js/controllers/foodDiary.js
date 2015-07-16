@@ -2,8 +2,15 @@ myApp.controller('FoodDiaryController',
   function($scope, $rootScope, $firebase, FoodTotal,
     CountMeals, FIREBASE_URL) {
 
+//   var todaysDate = FoodTotal.today();
+  var today = new Date();
+  var month = today.getUTCMonth() + 1; //months from 1-12
+  var day = today.getUTCDate();
+  var year = today.getUTCFullYear();
+  var todaysDate = month + '-' + day + '-' + year;
+
   var ref = new Firebase(FIREBASE_URL + '/users/' + 
-    $rootScope.currentUser.$id + '/food-diary/');
+    $rootScope.currentUser.$id + '/food-diary/' + todaysDate);
 
   var meals = $firebase(ref);
   $scope.meals = meals.$asObject();
@@ -25,6 +32,22 @@ myApp.controller('FoodDiaryController',
     $scope.today = todaysDate;
   }); //make sure meals data is loaded
 
+  $scope.prev = function() {
+    nxtDate = month + '-' + (day--) + '-' + year;
+    console.log(nxtDate);
+  	var nxtRef = new Firebase(FIREBASE_URL + '/users/' + 
+    $rootScope.currentUser.$id + '/food-diary/' + nxtDate);
+    var meals = $firebase(nxtRef);
+  	$scope.meals = meals.$asObject();
+  };
+  $scope.nxt = function() {
+    nxtDate = month + '-' + (day++) + '-' + year;
+    console.log(nxtDate);
+  	var nxtRef = new Firebase(FIREBASE_URL + '/users/' + 
+    $rootScope.currentUser.$id + '/food-diary/' + nxtDate);
+    var meals = $firebase(nxtRef);
+  	$scope.meals = meals.$asObject();
+  };
 
   $scope.addMeal = function() {
     meals.$push({

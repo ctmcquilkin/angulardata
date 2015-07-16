@@ -1,8 +1,25 @@
 myApp.factory('FoodTotal', function($firebase,
   $rootScope, FIREBASE_URL) {
 
+//   function today() {
+//   	var today = new Date();
+//   	var month = today.getUTCMonth() + 1; //months from 1-12
+//   	var day = today.getUTCDate();
+//   	var year = today.getUTCFullYear();
+//   	return month + '-' + day + '-' + year;
+//   }
+//   
+//   return {
+//   	today: today
+//   	};
+  var today = new Date();
+  var month = today.getUTCMonth() + 1; //months from 1-12
+  var day = today.getUTCDate();
+  var year = today.getUTCFullYear();
+  var todaysDate = month + '-' + day + '-' + year;
+
   var ref = new Firebase(FIREBASE_URL + '/users/' + 
-    $rootScope.currentUser.$id + '/food-diary');
+    $rootScope.currentUser.$id + '/food-diary/' + todaysDate);
 
   var mealsInfo = $firebase(ref);
 

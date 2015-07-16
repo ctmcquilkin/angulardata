@@ -19,6 +19,11 @@
   </form>
 
   <h2>Your Food Diary:</h2>
+  <button type="submit" class="btn"
+  ng-click="prev()"><</button>
+  <button type="submit" class="btn"
+  ng-click="nxt()">></button>
+<!-- 
     <span class="label">Showing Meals for:</span>
       <select ng-model="dateFilter.date">
       	<option value="0">Today</option>
@@ -26,6 +31,7 @@
         <option value="2">Last Week</option>
         <option value="3">All</option>
       </select>
+ -->
     </div><!-- formgroup -->
   <div class="meeting" ng-repeat="(key, meal) in meals"> <!-- | dateFilter: dateFilter.date -->
   	<span class="text">{{meal.name}} Calories: {{meal.calories}} Added on: {{meal.date | date:'short'}}</span>
@@ -33,12 +39,6 @@
     <a class="btn btn-search tooltip" 
       ng-href="#/recipes/{{currentUser.regUser}}/{{key}}/recipeList">
       <span>View your saved {{meal.name}} recipes</span></a>
-
-<!-- 
-    <a class="btn btn-search tooltip" 
-      ng-href="#/recipes/{{currentUser.regUser}}/{{key}}/recipeList">
-      <span>Look for similar recipes on Eat Right</span></a>
- -->
 
     <a class="btn btn-save tooltip" 
       ng-href="#/recipes/{{currentUser.regUser}}/{{key}}">
