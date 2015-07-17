@@ -6,6 +6,14 @@ var appControllers = angular.module('appControllers',
   ['firebase']);
 
 myApp.run(['$rootScope', '$location', function($rootScope, $location) {
+  $rootScope.menuActive = function(url, exactMatch){
+    if (exactMatch){
+      return $location.path() == url;
+    }
+    else {
+      return $location.path().indexOf(url) == 0;
+    }
+  };
   $rootScope.$on('$routeChangeError',
   function(event, next, previous, error) {
     if(error === 'AUTH_REQUIRED') {

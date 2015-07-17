@@ -18,7 +18,8 @@
       ng-disabled="myform.$invalid">ADD</button>
   </form>
 
-  <h2>Your Food Diary:</h2>
+  <h2 ng-hide="nxtDate == today">Showing diary for: {{nxtDate}}</h2>
+  <h2 ng-show="nxtDate == today">Showing diary for: Today</h2>
   <button type="submit" class="btn"
   ng-click="prev()"><</button>
   <button type="submit" class="btn"

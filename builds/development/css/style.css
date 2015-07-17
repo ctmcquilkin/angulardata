@@ -416,6 +416,8 @@ p.error {
   .userlist  .info  {
     width: 70%;
   }
+  
+  .welcome-msg { display: none; }
 }
 
 ul.awardslist {
@@ -469,6 +471,7 @@ nav li.branding a {
   background: #1E9382;
   color: #A2CFA5;
 }
+.active { background-color: #A2CFA5; }
 
 nav ul {
   width: 100%;

@@ -8,6 +8,8 @@ myApp.controller('FoodDiaryController',
   var day = today.getUTCDate();
   var year = today.getUTCFullYear();
   var todaysDate = month + '-' + day + '-' + year;
+  var nxtDate = todaysDate;
+  $rootScope.nxtDate = nxtDate;
 
   var ref = new Firebase(FIREBASE_URL + '/users/' + 
     $rootScope.currentUser.$id + '/food-diary/' + todaysDate);
@@ -15,7 +17,7 @@ myApp.controller('FoodDiaryController',
   var meals = $firebase(ref);
   $scope.meals = meals.$asObject();
   
-  var todaysDate = new Date().getTime();
+  //var todaysDate = new Date().getTime();
 
   $scope.dateFilter = [
   	{ name: 'today', value : 0 },
@@ -32,17 +34,20 @@ myApp.controller('FoodDiaryController',
     $scope.today = todaysDate;
   }); //make sure meals data is loaded
 
-  $scope.prev = function() {
+//   console.log('today: ' + todaysDate);
+//   console.log('nxtDate: ' + nxtDate);
+
+  $scope.prev = function() { // this is janky, need to account for falling through to previous month
     nxtDate = month + '-' + (day--) + '-' + year;
-    console.log(nxtDate);
+    $rootScope.nxtDate = nxtDate;
   	var nxtRef = new Firebase(FIREBASE_URL + '/users/' + 
     $rootScope.currentUser.$id + '/food-diary/' + nxtDate);
     var meals = $firebase(nxtRef);
   	$scope.meals = meals.$asObject();
   };
-  $scope.nxt = function() {
+  $scope.nxt = function() {// this is janky, need to account for falling into next month
     nxtDate = month + '-' + (day++) + '-' + year;
-    console.log(nxtDate);
+    $rootScope.nxtDate = nxtDate;
   	var nxtRef = new Firebase(FIREBASE_URL + '/users/' + 
     $rootScope.currentUser.$id + '/food-diary/' + nxtDate);
     var meals = $firebase(nxtRef);
