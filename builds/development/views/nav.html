@@ -1,10 +1,16 @@
 <div class="table">
   <ul>
-    <li class="branding"><a ng-href="#/">Eat Right</a></li>
-    <li><a ng-show="currentUser" ng-href="#/food-diary">Food Diary
+    <li class="branding"><a ng-href="#/" ng-class="{true: 'active'}[menuActive('/', true)]">Eat Right</a></li>
+    <li><a ng-show="currentUser" ng-href="#/food-diary" ng-class="{true: 'active'}[menuActive('/food-diary')]">Diary
     <span ng-show="howManyMeals">
       {{ '(' + howManyMeals + ')' }}</span></a></li>
-    <li><a ng-hide="currentUser" ng-href="#/login">Login</a></li>
-    <li><a ng-hide="currentUser" ng-href="#/register">Register</a></li>
+    <li><a ng-hide="currentUser" ng-href="#/login" ng-class="{true: 'active'}[menuActive('/login')]">Login</a></li>
+    <li><a ng-hide="currentUser" ng-href="#/register" ng-class="{true: 'active'}[menuActive('/register')]">Register</a></li>
+    <li>
+	  <div class="userinfo" 
+		ng-controller="StatusController" ng-show="currentUser">
+		<a ng-href="#/logout" ng-click="logout()"> <span class="userinfo"><span welcome-msg class="welcome-msg"></span>{{ currentUser.firstname }}<i class="welcome-msg">!</i></span>  logout</a>
+	  </div>
+    </li>
   </ul>
 </div>

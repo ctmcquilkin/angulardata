@@ -1,11 +1,19 @@
 var myApp = angular.module('myApp', ['ngRoute',
-'firebase', 'appControllers'])
+'firebase', 'appControllers', 'myApp.filters'])
 .constant('FIREBASE_URL', 'https://eat-right.firebaseio.com/');
 
 var appControllers = angular.module('appControllers',
   ['firebase']);
 
 myApp.run(['$rootScope', '$location', function($rootScope, $location) {
+  $rootScope.menuActive = function(url, exactMatch){
+    if (exactMatch){
+      return $location.path() == url;
+    }
+    else {
+      return $location.path().indexOf(url) == 0;
+    }
+  };
   $rootScope.$on('$routeChangeError',
   function(event, next, previous, error) {
     if(error === 'AUTH_REQUIRED') {
@@ -17,6 +25,14 @@ myApp.run(['$rootScope', '$location', function($rootScope, $location) {
 
 myApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider.
+    when('/', {
+      templateUrl: 'views/home.html',
+      controller:  'HomeController'
+    }).
+    when('/tags/:mId', {
+      templateUrl: 'views/recipeCategory.html',
+      controller:  'BrowseController'
+    }).
     when('/login', {
       templateUrl: 'views/login.html',
       controller:  'RegistrationController'
@@ -29,9 +45,13 @@ myApp.config(['$routeProvider', function($routeProvider) {
       templateUrl: 'views/recipes.html',
       controller:  'RecipeController'
     }).
-    when('/checkins/:uId/:mId/recipeList', {
-      templateUrl: 'views/recipelist.html',
+    when('/recipes/:uId/:mId/recipeList', {
+      templateUrl: 'views/recipeList.html',
       controller:  'RecipeController'
+    }).
+    when('/recipe/:mId', {
+      templateUrl: 'views/recipe.html',
+      controller:  'RecipeListingController'
     }).
     when('/food-diary', {
       templateUrl: 'views/foodDiary.html',

@@ -1,17 +1,20 @@
 <div class="checkinslist">
-  <h1>{{recipe.recipename}} Recipes</h1>
-  <p>Here's a list of similar recipes you have added to Eat Right</p>
-
-  <div class="search cf">
-    <H2>Search Recipies</H2>
-    <input type="text" ng-model="query" placeholder="Search for Recipies">
+  <h1>{{whichrecipe}} Recipes</h1>
+  <p>Browse recipes Tagged: {{whichrecipe}} on Eat Right</p>
+ 
+   <div class="search cf">
+    <H2>Search {{whichrecipe}} Recipies</H2>
+    <input type="text" ng-model="query" placeholder="Search for {{whichrecipe}} Recipies">
 
     <div class="formgroup cf">
       <span class="label">filter by:</span>
       <select ng-model="order">
-        <option value="recipename">Recipe Name</option>
-        <option value="lastname">Ingredient Name</option>
         <option value="date">Date</option>
+<!-- 
+        <option value="date">Meal Type</option>
+        <option value="date">Cuisine</option>
+        <option value="date">Prep</option>
+ -->
       </select>
     </div><!-- formgroup -->
 
@@ -23,6 +26,12 @@
         name="direction" value="reverse">
       <label for=dirdescending>desc</label>
     </div><!-- formgroup -->
+    
+    <div class="formgroup cf">
+      <span class="label">tags:</span>
+      <p ng-repeat="tag in tagList"><a class="btn btn-cat btn-recipe tag tooltip"
+	href="#/tags/{{tag.$id}}">{{tag.$id}}</a></p>
+    </div><!-- formgroup -->
 
     <div ng-show="currentUser" class="buttons cf">
       <button ng-hide="recordId" class="btn btn-pick"
@@ -33,9 +42,51 @@
     </div><!-- buttons -->
 
   </div><!-- search -->
+<ul class="recipes">
+  <li class="recipe shadow" ng-repeat="tags in taggedRecipes | 
+  orderBy: order:direction | filter: { $id: recordId,
+  $: query}">
+  	<a class="btn btn-list tooltip" href="#/recipe/{{tags.$id}}/">
+    <img src="http://www.lorempixel.com/164/108/food/" />
+    </a>
+    <h1>{{tags.recipeName}}</h1>
+    <h2>By: {{tags.recipeAuthor}}</h2>
+    <p>Prep Time: {{tags.recipeCooktime}}</p>
+	<a class="btn btn-cat btn-recipe tag tooltip"
+	href="#/tags/{{whichrecipe}}">
+	{{whichrecipe}}
+	<span>Explore {{whichrecipe}} recipes</span></a>
+  </li>
+</ul>
+
+<!-- 
+    <ul class="awardslist userlist cf">
+    	<li class="cf" ng-repeat="tags in taggedRecipes | 
+      	orderBy: order:direction | filter: { $id: recordId,
+      	$: query}">
+    		<form>
+				<div class="award">
+					{{tags.recipeName}} Added on: {{tags.date | date:'short'}} By: {{tags.recipeAuthor}} Prep Time: {{tags.recipeCooktime}} Tags:
+					<img src="{{tags.images}}" alt="{{whichrecipe}}">
+					<div class="buttons">
+						<a class="btn btn-cat btn-recipe tooltip" href="#/{{tags.recipeURL}}"> <!~~ http://localhost:8000/#/recipes/simplelogin:4/2/recipeList ~~>
+							<span>
+							Explore Your {{tags.$id}} recipes
+							</span>
+						</a>
+					</div>
+				</div>
+			</form>
+    	</li>
+    </ul>
+ -->
+
+</div>
+
+<!-- 
   <ul class="userlist cf">
     <li ng-class="recipe.userState" 
-      ng-repeat="recipe in recipes | 
+      ng-repeat="tags in taggedRecipes | 
       orderBy: order:direction | filter: { $id: recordId,
       $: query}">
       <div class="checkin">
@@ -46,27 +97,20 @@
           <span>Delete this recipe</span></button>
           <button class="btn btn-comment tooltip"
             ng-click="showLove(recipe)">
-            <span>Comments/Details</span></button>
-          <a class="btn btn-list tooltip"
-            href="#/recipe/{{recipe.$id}}/"><!-- #/recipes/{{whichuser}}{{recipe.$id}}/ -->
-            <span>Recipe</span></a>
-        </div> <!-- buttons -->
+            <span>Show the love</span></button>
+        </div> <!~~ buttons ~~>
         <div class="info">
-          <h2>{{recipe.firstname}}'s {{recipe.recipename}}</h2>
+          <h2>{{recipe.firstname}}'s {{tags.$id}}</h2>
           <div class="date">
             {{ recipe.date | date: "MMM d, yy h:mm a"}}
-          </div><!-- date -->
-        </div><!-- info -->
+          </div><!~~ date ~~>
+        </div><!~~ info ~~>
 
         <div class="showcheckins" ng-show="recipe.show">
-          <p>Yield: {{recipe.recipeyield}}</p>
-          <p>Prep Time: {{recipe.recipeCooktime}}</p>
-		  <a class="btn btn-cat btn-recipe tag tooltip"
-			href="#/tags/{{value}}"
-			ng-repeat="(key, value) in recipe.recipeTags">
-			<!-- {{key}} :  -->{{value}}
-			<span>Explore {{value}} recipes</span></a>
-
+          <p>{{recipe.recipeyield}}</p>
+          <p>{{recipe.recipeingredients}}</p>
+          <p>{{recipe.recipecooktime}}</p>
+          <p>{{recipe.recipeprep}}</p>
           <form class="cf"
             ng-submit="giveLove(recipe, recipe.giftText)"
             novalidate>
@@ -86,12 +130,12 @@
                     confirmation-needed = "Are you sure you want to delete this comment?"
                     ng-click="deleteLove(recipe.$id,key)">
                     <span>Delete this comment</span></button>
-                </div><!-- buttons -->
-              </div><!-- comment -->
+                </div><!~~ buttons ~~>
+              </div><!~~ comment ~~>
             </li>            
           </ul>
-        </div><!-- showrecipes -->
-      </div><!-- recipe -->
+        </div><!~~ showrecipes ~~>
+      </div><!~~ recipe ~~>
     </li>
-  </ul>
-</div>
+  </ul>  
+ -->

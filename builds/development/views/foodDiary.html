@@ -1,6 +1,7 @@
 <div class="meetings cf">
 
-  <h1>Add Meal for (today's date)</h1>
+  <h1>Today {{today | date:'shortDate'}}</h1>
+  <h2>your daily goal({{goal}}) - today's total({{foodTotal}}) = calories remaining({{goal - foodTotal}})</h2>
   <form class="formgroup addmeeting cf"
     name="myform"
     ng-submit="addMeal()"
@@ -9,25 +10,50 @@
       <input type="text" name="mealname" 
       placeholder="Meal name" 
         ng-model="mealname" ng-required="true">
+      <input type="text" name="mealcalories" 
+      placeholder="Meal calories" 
+        ng-model="mealcalories" ng-required="true">
     </div>
     <button type="submit" class="btn"
-      ng-disabled="myform.$invalid">+</button>
+      ng-disabled="myform.$invalid">ADD</button>
   </form>
 
-  <h2>Your recent meals</h2>
-  <div class="meeting" ng-repeat="(key, meal) in meals">
+  <h2 ng-hide="nxtDate == today">Showing diary for: {{nxtDate}}</h2>
+  <h2 ng-show="nxtDate == today">Showing diary for: Today</h2>
+  <button type="submit" class="btn"
+  ng-click="prev()"><</button>
+  <button type="submit" class="btn"
+  ng-click="nxt()">></button>
+<!-- 
+    <span class="label">Showing Meals for:</span>
+      <select ng-model="dateFilter.date">
+      	<option value="0">Today</option>
+        <option value="1">Yesterday</option>
+        <option value="2">Last Week</option>
+        <option value="3">All</option>
+      </select>
+ -->
+    </div><!-- formgroup -->
+  <div class="meeting" ng-repeat="(key, meal) in meals"> <!-- | dateFilter: dateFilter.date -->
+  	<span class="text">{{meal.name}} Calories: {{meal.calories}} Added on: {{meal.date | date:'short'}}</span>
+
+    <a class="btn btn-search tooltip" 
+      ng-href="#/recipes/{{currentUser.regUser}}/{{key}}/recipeList">
+      <span>View your saved {{meal.name}} recipes</span></a>
+
+    <a class="btn btn-save tooltip" 
+      ng-href="#/recipes/{{currentUser.regUser}}/{{key}}">
+      <span>Save your {{meal.name}} Recipe</span></a>
+
+<!-- 
+    <a class="btn btn-share tooltip" 
+      ng-href="#/recipes/{{currentUser.regUser}}/{{key}}">
+      <span>Share your Recipe</span></a>
+ -->
+  
     <button class="btn btn-delete tooltip"
       ng-click="deleteMeal(key)">
     <span>Delete this meal</span></button>
-
-    <a class="btn btn-list tooltip" 
-      ng-href="#/checkins/{{currentUser.regUser}}/{{key}}/checkinsList">
-      <span>Look for similar recipes on Eat Right</span></a>
-
-    <a class="btn btn-checkin tooltip" 
-      ng-href="#/checkins/{{currentUser.regUser}}/{{key}}">
-      <span>Share your Recipe</span></a>
-
-    <span class="text">{{meal.name}}</span>
+    
   </div><!-- meal list -->
 </div><!-- meetings cf -->

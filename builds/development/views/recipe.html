@@ -1,0 +1,19 @@
+<div class="checkinslist">
+  <h1>{{recipe.recipeName}}</h1>
+  <img src="http://www.lorempixel.com/600/400/food/" />
+  <p>By: {{recipe.recipeAuthor}} Prep time: {{recipe.recipeCooktime}} Servings: {{recipe.recipeyield}}</p>
+  <div class="meeting">
+  	<p>Ingredients: {{recipe.recipeingredients}}</p>
+  	<p>Preparation: {{recipe.recipePrep}}</p>
+        
+  	<p ng-show="currentUser">Your Rating: {{ meals.rating}} <ratings size="5" rating="rated" readonly="readonly" change2zero="true"></ratings></p>
+  	<p ng-hide="currentUser">Average Rating: {{ rated }} <ratings size="5" rating="rated" readonly="readonly2"></ratings></p>
+  	<p>Tags:
+		<a class="btn btn-cat btn-recipe tag tooltip"
+		href="#/tags/{{value}}"
+		ng-repeat="(key, value) in recipe.recipeTags">
+		<!-- {{key}} :  -->{{value}}
+		<span>Explore {{value}} recipes</span></a>
+	</p>
+  </div>
+</div>
